@@ -29,16 +29,32 @@ import com.jompon.baserxbus2.fragment.MainFragment;
 
 public class MainActivity extends BaseActivity {
 
+    private Button btnLocation;
+    private TextView txt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, new MainFragment());
-        ft.commit();
+        bindingView();
+        bindingData();
+        if( savedInstanceState == null ){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, new MainFragment());
+            ft.commit();
+        }
+    }
 
-        ((Button)findViewById(R.id.btn_location)).setOnClickListener(new View.OnClickListener() {
+    private void bindingView( )
+    {
+        btnLocation = (Button) findViewById(R.id.btn_location);
+        txt = (TextView) findViewById(R.id.txt);
+    }
+
+    private void bindingData( )
+    {
+        btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -50,6 +66,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void tapEvent(TapEvent event) {
-        ((TextView)findViewById(R.id.txt)).setText(event.getName());
+        txt.setText(event.getName());
     }
 }

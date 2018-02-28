@@ -24,17 +24,21 @@ import com.jompon.baserxbus2.R;
 import com.jompon.baserxbus2.bus.AutoEvent;
 import com.jompon.baserxbus2.service.FusedLocationService;
 
-/**
- * Created by Jompon on 1/17/2018.
- */
-
 public class MainActivity2 extends BaseActivity {
+
+    private TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        bindingView();
         startFusedLocationService();
+    }
+
+    private void bindingView( )
+    {
+        txt = (TextView) findViewById(R.id.txt);
     }
 
     @Override
@@ -45,7 +49,7 @@ public class MainActivity2 extends BaseActivity {
 
     @Override
     protected void autoEvent(AutoEvent event) {
-        ((TextView)findViewById(R.id.txt)).setText(event.getName());
+        txt.setText(event.getName());
     }
 
     private void startFusedLocationService( )
